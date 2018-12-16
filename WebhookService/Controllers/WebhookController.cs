@@ -66,12 +66,15 @@ namespace WebhookService.Controllers
         {
             JObject jObject = JObject.Parse(jsonData);
 
+            JToken resourceToken = jObject["resource"];
+            JToken resourceContainersToken = jObject["resourceContainers"];
+
             return new BuildNotification
             {
                 Id = (string)jObject["id"],
                 EventType = (string)jObject["eventType"],
-                ResourceUrl = (string)jObject["resource"]["url"],
-                ProjectId = (string)jObject["resourceContainers"]["project"]["id"],
+                ResourceUrl = resourceToken.HasValues ? (string)jObject["resource"]["url"] : null,
+                ProjectId = resourceContainersToken.HasValues ? (string)jObject["resourceContainers"]["project"]["id"] : null,
                 CreatedTime = (DateTime)jObject["createdDate"]
             };
         }
