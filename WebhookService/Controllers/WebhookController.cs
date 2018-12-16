@@ -50,7 +50,7 @@ namespace WebhookService.Controllers
 
                 try
                 {
-                    BuildNotification buildNotification = ParseJsonData(jsonData);
+                    BuildNotification buildNotification = ParseBuildNotificationJsonData(jsonData);
                     _repository.Add(buildNotification);
                 }
                 catch (Exception ex)
@@ -62,7 +62,7 @@ namespace WebhookService.Controllers
             return Ok();
         }
 
-        private BuildNotification ParseJsonData(string jsonData)
+        private BuildNotification ParseBuildNotificationJsonData(string jsonData)
         {
             JObject jObject = JObject.Parse(jsonData);
 
@@ -71,6 +71,7 @@ namespace WebhookService.Controllers
                 Id = (string)jObject["id"],
                 EventType = (string)jObject["eventType"],
                 ResourceUrl = (string)jObject["resource"]["url"],
+                ProjectId = (string)jObject["project"]["id"],
                 CreatedTime = (DateTime)jObject["createdDate"]
             };
         }

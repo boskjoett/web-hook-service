@@ -6,6 +6,7 @@ namespace WebhookService.Models
     public class BuildNotification : RepositoryItem
     {
         public string EventType { get; set; }
+        public string ProjectId { get; set; }
         public string ResourceUrl { get; set; }
         public DateTime CreatedTime { get; set; }
 
