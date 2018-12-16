@@ -71,7 +71,7 @@ namespace WebhookService.Controllers
                 Id = (string)jObject["id"],
                 EventType = (string)jObject["eventType"],
                 ResourceUrl = (string)jObject["resource"]["url"],
-                ProjectId = (string)jObject["project"]["id"],
+                ProjectId = (string)jObject["resourceContainers"]["project"]["id"],
                 CreatedTime = (DateTime)jObject["createdDate"]
             };
         }

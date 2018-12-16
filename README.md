@@ -16,7 +16,11 @@ https://devopswebhook.azurewebsites.net/api/BuildNotifications/
 
 #### Azure DevOps Web Hook JSON
 
-See: https://docs.microsoft.com/en-us/azure/devops/service-hooks/services/webhooks?view=vsts
+Azure Build Notification Web hook Endpoint URL:<br />
+https://devopswebhook.azurewebsites.net/api/webhook/vsts
+
+See: https://docs.microsoft.com/en-us/azure/devops/service-hooks/services/webhooks?view=vsts <br />
+for info on how to configure service hooks in Azure DevOps.
 
 Example JSON POST data from a Azure DevOps *build complete* web hook notification:
 
