@@ -5,7 +5,16 @@ Web hook API for receiving web hook notifications from Azure DevOps.
 Received notifications are stored in a non-persistent repository that can 
 be read via a REST API.
 
-### Azure DevOps Webhook JSON
+## Azure Hosting
+
+Hosted on a free App Service in Azure.
+
+Hostname: **devopswebhook.azurewebsites.net**
+
+Read received build notifications:<br />
+https://devopswebhook.azurewebsites.net/api/BuildNotifications/
+
+#### Azure DevOps Web Hook JSON
 
 See: https://docs.microsoft.com/en-us/azure/devops/service-hooks/services/webhooks?view=vsts
 
