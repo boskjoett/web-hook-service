@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.SignalR;
 using Newtonsoft.Json.Linq;
 using WebhookService.Models;
 using WebhookService.Repositories;
@@ -17,11 +18,15 @@ namespace WebhookService.Controllers
     public class WebhookController : ControllerBase
     {
         private readonly IRepository<BuildNotification> _repository;
+        private readonly IHubContext<BuildNotificationHub> _hubContext;
         private readonly ILogger _logger;
 
-        public WebhookController(IRepository<BuildNotification> repository, ILogger<WebhookController> logger)
+        public WebhookController(IRepository<BuildNotification> repository,
+                                 IHubContext<BuildNotificationHub> hubContext,
+                                 ILogger<WebhookController> logger)
         {
             _repository = repository;
+            _hubContext = hubContext;
             _logger = logger;
         }
 
@@ -55,8 +60,7 @@ namespace WebhookService.Controllers
                     _repository.Add(buildNotification);
 
                     // Push via SignalR
-                    BuildNotificationHub hub = new BuildNotificationHub();
-                    await hub.PushNotificationAsync(buildNotification);
+                    await _hubContext.Clients.All.SendAsync("BuildCompleted", buildNotification);
                 }
                 catch (Exception ex)
                 {
