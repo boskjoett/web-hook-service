@@ -6,7 +6,7 @@ namespace WebhookService.Hubs
 {
     public class BuildNotificationHub : Hub
     {
-        public async Task PushNotificationAsync(BuildNotification buildNotification )
+        public async Task PushNotificationAsync(BuildNotification buildNotification)
         {
             await Clients.All.SendAsync("BuildCompleted", buildNotification);
         }

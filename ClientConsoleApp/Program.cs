@@ -7,22 +7,36 @@ namespace ClientConsoleApp
 {
     public class Program
     {
-        public static async Task Main(string[] args)
+        public static void Main(string[] args)
         {
             Console.WriteLine("Azure DevOps build notification client started");
 
+            try
+            {
+                StartSignalRHub().Wait();
+
+                Console.WriteLine("SignalR connection started");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception: " + ex.Message);
+            }
+
+            Console.WriteLine("Press ENTER to exit...");
+            Console.ReadLine();
+        }
+
+        private static async Task StartSignalRHub()
+        {
             var connection = new HubConnectionBuilder()
-                .WithUrl("http://localhost:5000/BuildNotificationHub")
+                .WithUrl("https://devopswebhook.azurewebsites.net/BuildNotificationHub")
                 //.ConfigureLogging(logging =>
                 //{
                 //    logging.AddConsole();
                 //})
-                //.AddMessagePackProtocol()
                 .Build();
 
             await connection.StartAsync();
-
-            Console.WriteLine("SignalR connection started");
 
             connection.Closed += e =>
             {

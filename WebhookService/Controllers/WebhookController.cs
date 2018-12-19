@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
 using WebhookService.Models;
 using WebhookService.Repositories;
+using WebhookService.Hubs;
 
 namespace WebhookService.Controllers
 {
@@ -52,6 +53,10 @@ namespace WebhookService.Controllers
                 {
                     BuildNotification buildNotification = ParseBuildNotificationJsonData(jsonData);
                     _repository.Add(buildNotification);
+
+                    // Push via SignalR
+                    BuildNotificationHub hub = new BuildNotificationHub();
+                    await hub.PushNotificationAsync(buildNotification);
                 }
                 catch (Exception ex)
                 {

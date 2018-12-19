@@ -14,9 +14,14 @@ Hostname: **devopswebhook.azurewebsites.net**
 Read received build notifications:<br />
 https://devopswebhook.azurewebsites.net/api/BuildNotifications/
 
+## SignalR Hub
+
+The web application pushes build notifications via SignalR using this endpoint:
+https://devopswebhook.azurewebsites.net/BuildNotificationHub
+
 #### Azure DevOps Web Hook JSON
 
-Azure Build Notification Web hook Endpoint URL:<br />
+Azure build notification web hook endpoint URL:<br />
 https://devopswebhook.azurewebsites.net/api/webhook/vsts
 
 See: https://docs.microsoft.com/en-us/azure/devops/service-hooks/services/webhooks?view=vsts <br />
