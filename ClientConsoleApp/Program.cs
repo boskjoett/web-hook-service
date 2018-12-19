@@ -7,9 +7,21 @@ namespace ClientConsoleApp
 {
     public class Program
     {
+        static string commandToRun;
+
         public static void Main(string[] args)
         {
+            if (args.Length > 0)
+            {
+                commandToRun = args[0];
+            }
+
             Console.WriteLine("Azure DevOps build notification client started");
+
+            if (!string.IsNullOrEmpty(commandToRun))
+            {
+                Console.WriteLine("Command to execute: " + commandToRun);
+            }
 
             try
             {
